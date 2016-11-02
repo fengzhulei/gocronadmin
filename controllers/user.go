@@ -2,7 +2,18 @@ package controllers
 
 import (
 	"beegoweb/models"
+	"errors"
+	"github.com/astaxie/beego/cache"
+	"github.com/astaxie/beego/utils/captcha"
 )
+
+var cpt *captcha.Captcha
+
+func init() {
+	// use beego cache system store the captcha data
+	store := cache.NewMemoryCache()
+	cpt = captcha.NewWithFilter("/captcha/", store)
+}
 
 type UserController struct {
 	baseController
@@ -14,17 +25,42 @@ func (c *UserController) Index() {
 	c.TplName = "user.tpl"
 }
 
-func (c * UserController) Login()  {
-	c.SetSession("uid",4788)
-	userinfo ,err := models.GetUserInfoByName("wida")
-	if err != nil{
-		c.JsonData["status"] = -1
-		c.JsonData["err"] = "not user"
-	}else{
-		c.JsonData["status"] = 0
-		c.JsonData["data"] = userinfo
+func (c *UserController) Login() {
+
+	_,ok := c.GetSession("uid").(int)
+	if ok {
+		c.Redirect("/",302)
 	}
 
-	c.Data["json"] = c.JsonData
-	c.ServeJSON()
+	if c.GetString("username") != "" && c.GetString("password") != "" {
+		if !cpt.VerifyReq(c.Ctx.Request) {
+			c.Data["errorinfo"] = errors.New("验证码错误")
+			goto GOTO
+		}
+		user, err := c.toLogin(c.GetString("username"), c.GetString("password"))
+		if err != nil {
+			c.Data["errorinfo"] = err.Error()
+			goto GOTO
+		}
+		c.SetSession("uid", user.Id)
+		c.SetSession("username", user.Name)
+		c.Redirect("/", 302)
+	}
+	GOTO:
+	c.TplName = "login.tpl"
+
 }
+
+func (c *UserController) toLogin(name, pwd string) (*models.AdminUser, error) {
+	userinfo, err := models.GetUserInfoByName(name)
+	if err != nil {
+		return nil, errors.New("not user")
+	} else {
+
+		if c.md5Str(pwd) != userinfo.Pwd {
+			return nil, errors.New("pwd error")
+		}
+	}
+	return &userinfo, nil
+}
+
