@@ -1,11 +1,8 @@
 package controllers
 
-import (
-	"github.com/astaxie/beego"
-)
 
 type MainController struct {
-	beego.Controller
+	baseController
 }
 
 func (c *MainController) Get() {
@@ -13,3 +10,4 @@ func (c *MainController) Get() {
 	c.Data["Email"] = "astaxie@gmail.com"
 	c.TplName = "index.tpl"
 }
+

@@ -1,12 +1,11 @@
 package controllers
 
 import (
-	"github.com/astaxie/beego"
 	"beegoweb/models"
 )
 
 type UserController struct {
-	beego.Controller
+	baseController
 }
 
 func (c *UserController) Index() {
@@ -19,8 +18,13 @@ func (c * UserController) Login()  {
 	c.SetSession("uid",4788)
 	userinfo ,err := models.GetUserInfoByName("wida")
 	if err != nil{
-		//return
+		c.JsonData["status"] = -1
+		c.JsonData["err"] = "not user"
+	}else{
+		c.JsonData["status"] = 0
+		c.JsonData["data"] = userinfo
 	}
-	c.Data["json"] = userinfo
+
+	c.Data["json"] = c.JsonData
 	c.ServeJSON()
 }
