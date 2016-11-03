@@ -5,12 +5,10 @@ import (
 	"errors"
 	"github.com/astaxie/beego/cache"
 	"github.com/astaxie/beego/utils/captcha"
+	"strings"
 )
-
 var cpt *captcha.Captcha
-
 func init() {
-	// use beego cache system store the captcha data
 	store := cache.NewMemoryCache()
 	cpt = captcha.NewWithFilter("/captcha/", store)
 }
@@ -26,18 +24,18 @@ func (c *UserController) Index() {
 }
 
 func (c *UserController) Login() {
-
 	_,ok := c.GetSession("uid").(int)
 	if ok {
 		c.Redirect("/",302)
 	}
-
-	if c.GetString("username") != "" && c.GetString("password") != "" {
+	username :=strings.TrimSpace(c.GetString("username"))
+	password :=strings.TrimSpace(c.GetString("password"))
+	if  username != "" && password != "" {
 		if !cpt.VerifyReq(c.Ctx.Request) {
 			c.Data["errorinfo"] = errors.New("验证码错误")
 			goto GOTO
 		}
-		user, err := c.toLogin(c.GetString("username"), c.GetString("password"))
+		user, err := c.toLogin(username, password)
 		if err != nil {
 			c.Data["errorinfo"] = err.Error()
 			goto GOTO
@@ -48,7 +46,6 @@ func (c *UserController) Login() {
 	}
 	GOTO:
 	c.TplName = "login.tpl"
-
 }
 
 func (c *UserController) toLogin(name, pwd string) (*models.AdminUser, error) {
@@ -56,11 +53,9 @@ func (c *UserController) toLogin(name, pwd string) (*models.AdminUser, error) {
 	if err != nil {
 		return nil, errors.New("not user")
 	} else {
-
 		if c.md5Str(pwd) != userinfo.Pwd {
 			return nil, errors.New("pwd error")
 		}
 	}
 	return &userinfo, nil
 }
-
