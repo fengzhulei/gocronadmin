@@ -59,3 +59,10 @@ func (c *UserController) toLogin(name, pwd string) (*models.AdminUser, error) {
 	}
 	return &userinfo, nil
 }
+
+
+func (c *UserController)Logout()  {
+	c.DestroySession()
+	c.Redirect("/user/login", 302)
+
+}

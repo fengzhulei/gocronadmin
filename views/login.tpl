@@ -71,24 +71,8 @@
         </div>
         <p class="pull-right" style=""><a href="/" target="blank"></a></p>
     </div>
-<script type="text/javascript">
-$("#verify_code").click(function(){
-	var d = new Date()
-	var hour = d.getHours();
-	var minute = d.getMinutes();
-	var sec = d.getSeconds();
-    $(this).attr("src","/user/captcha/?"+hour+minute+sec);
-});
-</script>
 </div>
 </div>
 </div>
-<!--- + -快捷方式的提示 --->
-<script type="text/javascript">
-alertDismiss("alert-success",3);
-alertDismiss("alert-info",10);
-listenShortCut("icon-plus");
-listenShortCut("icon-minus");
-</script>
 </body>
 </html>
