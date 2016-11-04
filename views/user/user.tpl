@@ -4,7 +4,6 @@
 <head>
   <title>Beego</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
   <style type="text/css">
     *,body {
       margin: 0px;

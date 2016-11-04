@@ -14,5 +14,5 @@ func (c *MainController) Index() {
 func (c *MainController) Center()  {
 	c.Data["Website"] = "beego.me"
 	c.Data["Email"] = "astaxie@gmail.com"
-	c.TplName = "user.tpl"
+	c.TplName = "user/user.tpl"
 }

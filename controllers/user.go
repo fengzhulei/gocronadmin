@@ -18,9 +18,9 @@ type UserController struct {
 }
 
 func (c *UserController) Index() {
-	c.Data["Website"] = "beego.me"
-	c.Data["Email"] = "astaxie@gmail.com"
-	c.TplName = "user.tpl"
+	users := models.List()
+	c.Data["users"] = users
+	c.TplName = "user/user_list.tpl"
 }
 
 func (c *UserController) Login() {
@@ -45,7 +45,7 @@ func (c *UserController) Login() {
 		c.Redirect("/", 302)
 	}
 	GOTO:
-	c.TplName = "login.tpl"
+	c.TplName = "user/login.tpl"
 }
 
 func (c *UserController) toLogin(name, pwd string) (*models.AdminUser, error) {
@@ -58,6 +58,23 @@ func (c *UserController) toLogin(name, pwd string) (*models.AdminUser, error) {
 		}
 	}
 	return &userinfo, nil
+}
+
+
+func (c *UserController)Add()  {
+
+	username :=strings.TrimSpace(c.GetString("username"))
+	password :=strings.TrimSpace(c.GetString("password"))
+	confirm_password :=strings.TrimSpace(c.GetString("confirm_password"))
+	if  username != "" && password != "" && password == confirm_password {
+		_,err:=models.AddUser(username,c.md5Str(password))
+		if err == nil{
+			c.Redirect("/user/index",302)
+		}
+		c.Data["err_inf"] = "添加用户失败"
+
+	}
+	c.TplName = "user/user_add.tpl"
 }
 
 

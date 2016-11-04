@@ -48,10 +48,10 @@
           </a>
           <ul class="nav nav-second-level">
             <li>
-              <a class="J_menuItem" href="graph_echarts.html">用户列表</a>
+              <a class="J_menuItem" href="/user/index">用户列表</a>
             </li>
             <li>
-              <a class="J_menuItem" href="graph_flot.html">添加用户</a>
+              <a class="J_menuItem" href="/user/add">添加用户</a>
             </li>
           </ul>
         </li>
@@ -62,9 +62,9 @@
         <li>
           <a href="#"><i class="fa fa-picture-o"></i> <span class="nav-label">任务管理</span><span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <li><a class="J_menuItem" href="basic_gallery.html">任务列表</a>
+            <li><a class="J_menuItem" href="/cron/list">任务列表</a>
             </li>
-            <li><a class="J_menuItem" href="carousel.html">添加任务</a>
+            <li><a class="J_menuItem" href="/cron/add">添加任务</a>
             </li>
           </ul>
         </li>
