@@ -6,8 +6,6 @@ import (
 	"github.com/astaxie/beego/context"
 )
 
-
-
 func init() {
 	//登录过滤器
 	var FiterLogin  = func(ctx * context.Context) {
@@ -17,6 +15,7 @@ func init() {
 		}
 	}
 	beego.InsertFilter("/*",beego.BeforeRouter,FiterLogin)
-	beego.Router("/", &controllers.MainController{})
+	beego.Router("/", &controllers.MainController{},"*:Index")
+	beego.Router("/center", &controllers.MainController{},"*:Center")
 	beego.AutoRouter(&controllers.UserController{})
 }
