@@ -85,4 +85,42 @@
                     email: icon + "请输入您的E-mail"
                 }
             });
+            $("#cron_add").validate({
+                rules: {
+                    time: {
+                        required: true,
+                        minlength: 2
+                    },
+                    cmd: {
+                        required: true,
+                    },
+                    stime: {
+                        required: true,
+                    },
+                    etime: {
+                        required: true,
+                    },
+                    after:{
+                        required: true,
+                    }
+
+                },
+                messages: {
+                    time: {
+                        required: icon + "请输入表达"
+                    },
+                    cmd: {
+                        required: icon + "请输入cmd"
+                    },
+                    stime: {
+                        required: icon + "请输入开始时间"
+                    },
+                    etime: {
+                        required: icon + "请输入结束时间"
+                    },
+                    after: {
+                        required: icon + "请输入前置任务"
+                    }
+                }
+            });
         });

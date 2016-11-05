@@ -12,12 +12,13 @@ type  AdminUser struct {
 	Pwd string `orm:"size(32)"`
 	Email string `orm:"size(150)"`
 	Ctime time.Time
+	Cron []*Cron `orm:"reverse(many)"` // 设置一对多的反向关系
 }
 
 func init()  {
 	orm.RegisterDataBase("default", "mysql", "wida:wida@/mycron?charset=utf8", 30)
 	// register model
-	orm.RegisterModel(new(AdminUser))
+	orm.RegisterModel(new(AdminUser),new(Cron))
 	// create table
 	orm.RunSyncdb("default", false, true)
 	orm.Debug = true

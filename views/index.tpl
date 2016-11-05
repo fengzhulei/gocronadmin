@@ -62,7 +62,7 @@
         <li>
           <a href="#"><i class="fa fa-picture-o"></i> <span class="nav-label">任务管理</span><span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <li><a class="J_menuItem" href="/cron/list">任务列表</a>
+            <li><a class="J_menuItem" href="/cron/index">任务列表</a>
             </li>
             <li><a class="J_menuItem" href="/cron/add">添加任务</a>
             </li>
@@ -86,7 +86,7 @@
       </nav>
     </div>
     <div class="row J_mainContent" id="content-main">
-      <iframe id="J_iframe" width="100%" height="100%" src="/center" frameborder="0" data-id="center" seamless></iframe>
+      <iframe id="J_iframe" width="100%" height="100%" src="/cron/index" frameborder="0" data-id="center" seamless></iframe>
     </div>
   </div>
   <!--右侧部分结束-->
