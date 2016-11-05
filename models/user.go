@@ -6,10 +6,11 @@ import (
 	"time"
 )
 
-type AdminUser struct {
+type  AdminUser struct {
 	Id int
 	Name string `orm:"size(100)"`
 	Pwd string `orm:"size(32)"`
+	Email string `orm:"size(150)"`
 	Ctime time.Time
 }
 
@@ -30,6 +31,24 @@ func GetUserInfoByName(name string) ( AdminUser,error) {
 	return user,err
 }
 
+func UserInfo(id int) ( AdminUser,error)  {
+	o := orm.NewOrm()
+	qs := o.QueryTable("admin_user")
+	user := AdminUser{}
+	err := qs.Filter("id",id).One(&user)
+	return user,err
+
+}
+
+func ModifyUser(user AdminUser)(int64, error)  {
+	o := orm.NewOrm()
+	fields :=[]string{"name","email"}
+	if user.Pwd != ""{
+		fields = append(fields,"pwd")
+	}
+	return  o.Update(&user,fields...)
+}
+
 func List() []*AdminUser {
 	var users []*AdminUser
 	o := orm.NewOrm()
@@ -38,12 +57,14 @@ func List() []*AdminUser {
 	return users
 }
 
-func AddUser(name,pwd string) (int64, error) {
+func DelUser(id int) (int64, error) {
 	o := orm.NewOrm()
-	var user AdminUser
-	user.Name = name
-	user.Pwd = pwd
-	user.Ctime = time.Now()
+	return o.Delete(&AdminUser{Id: id})
+}
 
+
+func AddUser(user AdminUser) (int64, error) {
+	o := orm.NewOrm()
+	user.Ctime = time.Now()
 	return  o.Insert(&user)
 }

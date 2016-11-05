@@ -28,6 +28,7 @@
                         <tr>
                             <th>ID</th>
                             <th>用户名</th>
+                            <th>Email</th>
                             <th>平台</th>
                             <th>操作</th>
                         </tr>
@@ -37,10 +38,11 @@
                         <tr class="gradeX">
                             <td>{{.Id}}</td>
                             <td>{{.Name}}</td>
+                            <td>{{.Email}}</td>
                             <td>{{date .Ctime "Y-m-d H:i:s"}}</td>
                             <td>
-                                <a class="btn btn-primary btn-rounded" href="buttons.html#">修改</a>
-                                <a class="btn btn-success btn-rounded" href="buttons.html#">删除</a>
+                                <a class="btn btn-primary btn-rounded" href="/user/modify?id={{.Id}}">修改</a>
+                                <a class="btn btn-success btn-rounded" href="javascript:;" onclick="user_del({{.Id}})">删除</a>
                             </td>
                         </tr>
                         {{end}}
@@ -49,6 +51,7 @@
                         <tr>
                             <th>ID</th>
                             <th>用户名</th>
+                            <th>Email</th>
                             <th>平台</th>
                             <th>操作</th>
                         </tr>
@@ -77,26 +80,23 @@
         /* Init DataTables */
         var oTable = $('#editable').dataTable();
 
-        /* Apply the jEditable handlers to the table */
-        oTable.$('td').editable('../example_ajax.php', {
-            "callback": function (sValue, y) {
-                var aPos = oTable.fnGetPosition(this);
-                oTable.fnUpdate(sValue, aPos[0], aPos[1]);
-            },
-            "submitdata": function (value, settings) {
-                return {
-                    "row_id": this.parentNode.getAttribute('id'),
-                    "column": oTable.fnGetPosition(this)[2]
-                };
-            },
 
-            "width": "90%",
-            "height": "100%"
-        });
 
 
     });
+    var user_del = function (id) {
+        if (confirm("你确认要删除该用户吗？")){
+            $.post("/user/del",{"id":id},function(data){
+                if (data.status ==0){
+                    location.reload()
+                }else{
+                    alert(data.err)
+                }
 
+            })
+        }
+        return false
+    }
     function fnClickAddRow() {
         $('#editable').dataTable().fnAddData([
             "Custom row",
@@ -104,7 +104,6 @@
             "New row",
             "New row",
             "New row"]);
-
     }
 </script>
 </body>

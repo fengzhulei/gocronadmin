@@ -65,7 +65,7 @@
                    {{create_captcha}}
                      <input type="text" name="captcha" class="span4" placeholder="输入验证码" autocomplete="off" required="required">
 					 <input type="hidden" class="span12" name="submit" value="1">
-					 <input type="submit" class="btn btn-primary pull-right" name="loginSubmit" value="登入"/></div>
+					 <input type="submit" class="btn btn-primary pull-right" name="loginSubmit" value="登入" value="{{}}"/></div>
                 </form>
             </div>
         </div>

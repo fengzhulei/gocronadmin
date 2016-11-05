@@ -11,7 +11,7 @@
     <link href="/static/css/animate.css" rel="stylesheet">
     <link href="/static/css/style.css?v=4.1.0" rel="stylesheet">
     <script type="text/javascript" >
-        var page= "add";
+        var page= "modify";
     </script>
 </head>
 
@@ -21,10 +21,10 @@
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>添加用户</h5>
+                        <h5>编辑用户</h5>
                     </div>
                     <div class="ibox-content">
-                        <form class="form-horizontal m-t" id="signupForm" method="post" action="/user/add">
+                        <form class="form-horizontal m-t" id="signupForm" method="post" action="/user/modify">
                             {{if .err_info}}
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">{{.err_info}}</label>
@@ -33,13 +33,13 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">用户名：</label>
                                 <div class="col-sm-8">
-                                    <input id="username" name="username" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
+                                    <input id="username" name="username" class="form-control" type="text" value="{{.user.Name}}" aria-required="true" aria-invalid="true" class="error">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">E-mail：</label>
                                 <div class="col-sm-8">
-                                    <input id="email" name="email" class="form-control" type="email">
+                                    <input id="email" name="email" class="form-control" type="email" value="{{.user.Email}}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -55,6 +55,7 @@
                                     <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 请再次输入您的密码</span>
                                 </div>
                             </div>
+                            <input type="hidden" name="id" value="{{.user.Id}}">
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-3">
                                     <button class="btn btn-primary" type="submit">提交</button>
