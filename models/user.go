@@ -18,7 +18,7 @@ type  AdminUser struct {
 func init()  {
 	orm.RegisterDataBase("default", "mysql", "wida:wida@/mycron?charset=utf8", 30)
 	// register model
-	orm.RegisterModel(new(AdminUser),new(Cron))
+	orm.RegisterModel(new(AdminUser),new(Cron),new(CronHist))
 	// create table
 	orm.RunSyncdb("default", false, true)
 	orm.Debug = true

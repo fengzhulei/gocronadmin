@@ -18,6 +18,13 @@ func (c *CronController) Index() {
 	c.TplName = "cron/index.tpl"
 }
 
+func (c *CronController) Log() {
+	Id ,_ := c.GetInt("id")
+	hist := models.GetCronHist(Id)
+	c.Data["hist"] = hist
+	c.TplName = "cron/log.tpl"
+}
+
 
 func (c *CronController)Add()  {
 	if c.GetString("submit") != ""{
