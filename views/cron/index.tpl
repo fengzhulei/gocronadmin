@@ -50,13 +50,18 @@
                             <td>{{.Cmd}}</td>
                             <td>{{date .Stime "Y-m-d H:i:s"}}</td>
                             <td>{{date .Etime "Y-m-d H:i:s"}}</td>
-                            <td>{{.Running}}</td>
-                            <td>{{.Singleton}}</td>
-                            <td>{{.After}}</td>
-                            <td>{{.Status}}</td>
+                            <td>{{if .Running}}<a class="btn btn-danger btn-rounded" href="javascript:;">Running</a>{{else}}<a class="btn btn-default btn-rounded" href="javascript:;">Waiting</a>{{end}}</td>
+                            <td>{{if .Singleton}}<button class="btn btn-info btn-circle" type="button"><i class="fa fa-check"></i></button>{{else}}<button class="btn btn-warning btn-circle" type="button"><i class="fa fa-times"></i></button>{{end}}</td>
+                            <td>{{if .After}}{{.After}}{{else}}无{{end}}</td>
+                            <td>{{if .Status}}
+                                <a class="btn btn-danger btn-rounded" href="javascript:;" onclick="active_cron({{.Id}},'b')">已激活</a>
+                                {{else}}
+                                <a class="btn btn-default btn-rounded" href="javascript:;"  onclick="active_cron({{.Id}},'a')">未激活</a>
+                                {{end}}</td>
                             <td>
                                 <a class="btn btn-primary btn-rounded" href="/cron/modify?id={{.Id}}">修改</a>
-                                <a class="btn btn-primary btn-rounded" href="/cron/log?id={{.Id}}">查看日志</a>
+                                <a class="btn btn-info btn-rounded" href="/cron/log?id={{.Id}}">查看日志</a>
+                                <a class="btn btn-warning btn-rounded" href="javascript:;" onclick="cron_run_once({{.Id}})">立即执行一次</a>
                                 <a class="btn btn-success btn-rounded" href="javascript:;" onclick="cron_del({{.Id}})">删除</a>
                             </td>
                         </tr>
@@ -102,18 +107,43 @@
         var oTable = $('#editable').dataTable();
     });
     var cron_del = function (id) {
-        if (confirm("你确认要下架该任务吗？")){
+        if (confirm("你确认要删除该任务吗？")){
             $.post("/cron/del",{"id":id},function(data){
                 if (data.status ==0){
                     location.reload()
                 }else{
                     alert(data.err)
                 }
-
             })
         }
         return false
     }
+
+    var active_cron = function(id,act){
+        info = status == "a"?"你确认要激活这个任务吗？":"你确认要下架该任务吗？";
+        if (confirm(info)){
+            $.post("/cron/active",{"id":id,"act":act},function(data){
+                if (data.status ==0){
+                    location.reload()
+                }else{
+                    alert(data.err)
+                }
+            })
+        }
+    }
+
+    var cron_run_once = function(id,act){
+        if (confirm("你确认要马上执行一次该任务吗？")){
+            $.post("/cron/once",{"id":id},function(data){
+                if (data.status ==0){
+                    location.reload()
+                }else{
+                    alert(data.err)
+                }
+            })
+        }
+    }
+
     function fnClickAddRow() {
         $('#editable').dataTable().fnAddData([
             "Custom row",

@@ -6,5 +6,6 @@ type MainController struct {
 }
 
 func (c *MainController) Index() {
+	c.Data["name"] = c.GetSession("username").(string)
 	c.TplName = "index.tpl"
 }

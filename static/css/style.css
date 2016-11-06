@@ -274,6 +274,15 @@ body.body-small .navbar-top-links li:last-child {
     top: 12px;
 }
 
+.right_info .label {
+    line-height: 29px;
+    padding: 1px 5px;
+    font-size: 18px;
+   /* position: absolute;*/
+    right: 10px;
+    top: 12px;
+}
+
 .arrow {
     float: right;
     margin-top: 2px;

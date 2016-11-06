@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="renderer" content="webkit">
-  <title> hAdmin- 主页</title>
+  <title>任务管理后台</title>
   <meta name="keywords" content="">
   <meta name="description" content="">
   <!--[if lt IE 9]>
@@ -30,12 +30,12 @@
                                 <span class="clear">
                                     <span class="block m-t-xs" style="font-size:20px;">
                                         <i class="fa fa-area-chart"></i>
-                                        <strong class="font-bold">hAdmin</strong>
+                                        <strong class="font-bold">mycron</strong>
                                     </span>
                                 </span>
             </a>
           </div>
-          <div class="logo-element">hAdmin</div>
+          <div class="logo-element">mycron</div>
         </li>
         <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
           <span class="ng-scope">系统菜单</span>
@@ -79,10 +79,22 @@
         <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-info " href="#"><i class="fa fa-bars"></i> </a>
           <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
             <div class="form-group">
-              <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
+              <!--<input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">-->
             </div>
           </form>
         </div>
+        <ul class="nav navbar-top-links navbar-right">
+          <li class="dropdown">
+            <a class="right_info" href="javascript:;">
+               <span class="label label-warning">{{.name}}</span>
+            </a>
+          </li>
+          <li class="dropdown">
+            <a class="right_info" href="/user/logout">
+              <span class="label label-primary">退出</span>
+            </a>
+          </li>
+        </ul>
       </nav>
     </div>
     <div class="row J_mainContent" id="content-main">
