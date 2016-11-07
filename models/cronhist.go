@@ -6,7 +6,6 @@ import (
 	"time"
 )
 
-
 type CronHist struct {
 	Id              int
 	Cid             int
@@ -15,7 +14,6 @@ type CronHist struct {
 	Time          time.Time
 	Ret            string `orm:"size(255)"`
 }
-
 
 func GetCronHist(cid int) []*CronHist {
 	var cronHist []*CronHist
