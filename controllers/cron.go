@@ -21,7 +21,11 @@ func (c *CronController) Index() {
 func (c *CronController) Log() {
 	Id ,_ := c.GetInt("id")
 	hist := models.GetCronHist(Id)
-	c.Data["hist"] = hist
+	 rev_hist :=  make([]*models.CronHist,0)
+	for i:=len(hist)-1;i>=0;i--{
+		rev_hist = append(rev_hist,hist[i])
+	}
+	c.Data["hist"] = rev_hist
 	c.TplName = "cron/log.tpl"
 }
 

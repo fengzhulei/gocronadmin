@@ -18,6 +18,6 @@ type CronHist struct {
 func GetCronHist(cid int) []*CronHist {
 	var cronHist []*CronHist
 	o := orm.NewOrm()
-	o.QueryTable("cron_hist").Filter("cid",cid).OrderBy("-id").Limit(30).All(&cronHist)
+	o.QueryTable("cron_hist").Filter("cid",cid).OrderBy("-id").Limit(20).All(&cronHist)
 	return cronHist
 }
