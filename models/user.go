@@ -20,7 +20,7 @@ func init()  {
 	// register model
 	orm.RegisterModel(new(AdminUser),new(Cron),new(CronHist))
 	// create table
-	orm.RunSyncdb("default", false, true)
+	//orm.RunSyncdb("default", false, true)
 	orm.Debug = true
 }
 
