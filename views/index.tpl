@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="renderer" content="webkit">
-  <title>任务管理后台</title>
+  <title>任务管理后台-gocronadmin</title>
   <meta name="keywords" content="">
   <meta name="description" content="">
   <!--[if lt IE 9]>
@@ -30,12 +30,12 @@
                                 <span class="clear">
                                     <span class="block m-t-xs" style="font-size:20px;">
                                         <i class="fa fa-area-chart"></i>
-                                        <strong class="font-bold">mycron</strong>
+                                        <strong class="font-bold">gocronadmin</strong>
                                     </span>
                                 </span>
             </a>
           </div>
-          <div class="logo-element">mycron</div>
+          <div class="logo-element">gocron</div>
         </li>
         <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
           <span class="ng-scope">系统菜单</span>
@@ -60,7 +60,7 @@
           <span class="ng-scope">任务管理</span>
         </li>
         <li>
-          <a href="#"><i class="fa fa-picture-o"></i> <span class="nav-label">任务管理</span><span class="fa arrow"></span></a>
+          <a href="#"><i class="fa fa-table"></i> <span class="nav-label">任务管理</span><span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
             <li><a class="J_menuItem" href="/cron/index">任务列表</a>
             </li>

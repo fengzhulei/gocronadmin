@@ -1,7 +1,7 @@
 package main
 
 import (
-	_ "beegoweb/routers"
+	_ "gocronadmin/routers"
 	"github.com/astaxie/beego"
 )
 

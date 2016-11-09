@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"beegoweb/models"
+	"gocronadmin/models"
 	"errors"
 	"github.com/astaxie/beego/cache"
 	"github.com/astaxie/beego/utils/captcha"

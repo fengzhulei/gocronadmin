@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"beegoweb/models"
+	"gocronadmin/models"
 	"time"
 	"strings"
 )

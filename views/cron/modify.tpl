@@ -32,20 +32,22 @@
                             {{with .info}}
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">任务名称：</label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-4">
                                     <input id="name" name="name" class="form-control" value="{{.Name}}" type="text" aria-required="true" aria-invalid="true" class="error">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">时间调度表达式：</label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-4">
                                     <input id="time" name="time" class="form-control"  value="{{.Time}}"  type="text" aria-required="true" aria-invalid="true" class="error">
+                                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>输入crontab时间调度表达支持到秒 exp：*/1 * * * * * （每秒钟执行一次）</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">命令行：</label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-4">
                                     <input id="cmd" name="cmd" class="form-control"  value="{{.Cmd}}" type="text">
+                                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>输入shell命令 最好带上 >/dev/null </span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -72,7 +74,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">前置任务：</label>
-                                <div class="col-sm-4">
+                                <div class="col-sm-2">
                                     <input id="after" name="after" class="form-control" value="{{.After}}" type="text">
                                 </div>
                             </div>

@@ -87,6 +87,10 @@
             });
             $("#cron_add").validate({
                 rules: {
+                    name: {
+                        required: true,
+                        minlength: 2
+                    },
                     time: {
                         required: true,
                         minlength: 2
@@ -106,6 +110,9 @@
 
                 },
                 messages: {
+                    name: {
+                        required: icon + "请输入任务名"
+                    },
                     time: {
                         required: icon + "请输入表达"
                     },

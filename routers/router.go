@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"beegoweb/controllers"
+	"gocronadmin/controllers"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
 )
