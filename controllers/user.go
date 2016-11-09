@@ -31,10 +31,10 @@ func (c *UserController) Login() {
 	username :=strings.TrimSpace(c.GetString("username"))
 	password :=strings.TrimSpace(c.GetString("password"))
 	if  username != "" && password != "" {
-		/*if !cpt.VerifyReq(c.Ctx.Request) {
+		if !cpt.VerifyReq(c.Ctx.Request) {
 			c.Data["errorinfo"] = errors.New("验证码错误")
 			goto GOTO
-		}*/
+		}
 		user, err := c.toLogin(username, password)
 		if err != nil {
 			c.Data["errorinfo"] = err.Error()
